@@ -6,8 +6,8 @@ const FiltersGroup = props => {
     const {ratingsList} = props
 
     return ratingsList.map(rating => {
-      const {changeRatings, activeRatingId} = props
-      const onClickRatingItem = () => changeRatings(rating.ratingId)
+      const {changeRating, activeRatingId} = props
+      const onClickRatingItem = () => changeRating(rating.ratingId)
 
       const ratingClassName =
         rating.ratingId === activeRatingId ? 'active-rating' : 'rating'
@@ -18,7 +18,11 @@ const FiltersGroup = props => {
           key={rating.ratingId}
           onClick={onClickRatingItem}
         >
-          <img src={ratingsList.imageUrl} className={ratingClassName} alt="" />
+          <img
+            src={rating.imageUrl}
+            className="rating-img"
+            alt={`rating ${rating.ratingId}`}
+          />
           <p className={ratingClassName}>& up</p>
         </li>
       )
@@ -48,7 +52,7 @@ const FiltersGroup = props => {
           key={category.categoryId}
           onClick={onClickCategoryItem}
         >
-          <p className="category-name">{category.name}</p>
+          <p className={categoryClassName}>{category.name}</p>
         </li>
       )
     })
@@ -84,7 +88,7 @@ const FiltersGroup = props => {
           placeholder="Search"
           value={searchInput}
           onChange={onChangeSearchInput}
-          onKeyEvent={onEnterSearchInput}
+          onKeyDown={onEnterSearchInput}
         />
         <BsSearch className="search-icon" />
       </div>
